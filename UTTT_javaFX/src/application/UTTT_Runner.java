@@ -63,6 +63,7 @@ public class UTTT_Runner extends Application {
 			Label row8 = new Label("Row 8");
 			Label row9 = new Label("Row 9");
 			Button testButton = new Button("Start game?");
+
 			GridPane pane = new GridPane();
 			pane.setHgap(30);
 			pane.setVgap(30);

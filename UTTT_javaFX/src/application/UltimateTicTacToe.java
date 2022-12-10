@@ -1,6 +1,6 @@
 package application;
 
-import javafx.application.Application;
+import javafx.application.Application; 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -108,7 +108,7 @@ public class UltimateTicTacToe extends TicTacToe {
 						//Does the program need to "wait" until .start() finishes?
 						
 						//Changes next start_pos
-						start_pos[0] = outerBoard[row][col].last_pos[0]; //+1 is Dirty fix to internal problem :/ 
+						start_pos[0] = outerBoard[row][col].last_pos[0]; 
 						System.out.println("start_pos[0] = " + start_pos[0] + "\n" );
 
 						start_pos[1] = outerBoard[row][col].last_pos[1]; 
@@ -167,9 +167,24 @@ public class UltimateTicTacToe extends TicTacToe {
 					for(int c = 0; c < 3; c++) {
 						
 						//Params fixed from Andi's code
-						System.out.print(O_Hold.board[C][c].value);
+						System.out.print(O_Hold.board[C][c].value); 
+						
+						//Assign INNER Space pos
+						O_Hold.board[C][c].x = C; 
+						O_Hold.board[C][c].y = c; 
+						
+						//Assign OUTER Space pos
+						O_Hold.board[C][c].Out_x = R; 
+						O_Hold.board[C][c].Out_y = r;
+						 
+						//These might be useful for JavaFX. DO NOT DELETE (yet..) 
+						//Ex: Once all each spaces are rendered, we can highlight entire OUTER Board using Out_x and Out_y w/ mouse hovers. 
+						// From there, we can ONLY highlight spaces from an inner board with x and y.
+						
 						if (C < size) {
-							System.out.print("|"); //Prints rest of row
+							System.out.print("|"); //Prints rest of row 
+							
+							//Print/Make Java fx Spaces...?
 						} 
 								
 					} //End of InnerBoard Column loop  
