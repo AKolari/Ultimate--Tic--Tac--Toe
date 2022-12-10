@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.Screen;
 
@@ -18,14 +19,15 @@ public class UltimateTicTacToe extends TicTacToe {
 	 */ 
 	
 
-	private TicTacToe[][] outerBoard; 
+	protected TicTacToe[][] outerBoard; 
 	
 	
 	
 	public UltimateTicTacToe() {
 		super(); //Calls all original data from TTT 
 		size = 3;
-		outerBoard = new TicTacToe[3][3]; //Hard coded since TTT games are 3x3
+		outerBoard = new TicTacToe[3][3]; //Hard coded since TTT games are 3x3 
+		initializeOuterBoard();
 		
 	}  
 	
@@ -48,7 +50,7 @@ public class UltimateTicTacToe extends TicTacToe {
 		
 		System.out.println("To start, " + currentPlayer +  " can choose any inner board."); 
 		
-		initializeOuterBoard();
+//		initializeOuterBoard();
 		printOuterBoard();     //print board
 		System.out.println("It is " + currentPlayer + "'s turn.");
 		//Get input.
@@ -174,9 +176,14 @@ public class UltimateTicTacToe extends TicTacToe {
 						O_Hold.board[C][c].y = c; 
 						
 						//Assign OUTER Space pos
-						O_Hold.board[C][c].Out_x = R; 
-						O_Hold.board[C][c].Out_y = r;
-						 
+						O_Hold.board[R][r].Out_x = R; 
+						O_Hold.board[R][r].Out_y = r; 
+						
+						//Show Space
+//						VBox vbox = new VBox(); 
+//						pane 
+
+						
 						//These might be useful for JavaFX. DO NOT DELETE (yet..) 
 						//Ex: Once all each spaces are rendered, we can highlight entire OUTER Board using Out_x and Out_y w/ mouse hovers. 
 						// From there, we can ONLY highlight spaces from an inner board with x and y.
