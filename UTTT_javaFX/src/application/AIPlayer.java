@@ -12,7 +12,7 @@ public class AIPlayer extends Player{
     public int chooseValue(String item){
     
         
-		int value = new Random().nextInt(2);
+		int value = new Random().nextInt(3);
         System.out.println(this.getName()+" chose " +item+" "+value);
 		
 		return value;

@@ -26,7 +26,7 @@ public class UltimateTicTacToe extends TicTacToe {
 		super(PlayerOne, PlayerTwo); //Calls all original data from TTT 
 		size = 3;
 		board = new TicTacToe[3][3]; //Hard coded since TTT games are 3x3
-		
+		initializeOuterBoard();
 	}  
 	
 	/**
@@ -48,7 +48,7 @@ public class UltimateTicTacToe extends TicTacToe {
 		
 		System.out.println("To start, " + currentPlayer.getName() +  " can choose any inner board."); 
 		
-		initializeOuterBoard();
+//		initializeOuterBoard();
 		printOuterBoard();     //print board
 		System.out.println("It is " + currentPlayer.getName() + "'s turn.");
 		//Get input.
