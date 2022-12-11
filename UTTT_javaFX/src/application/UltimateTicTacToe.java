@@ -7,7 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.Screen;
 
@@ -19,15 +18,14 @@ public class UltimateTicTacToe extends TicTacToe {
 	 */ 
 	
 
-	protected TicTacToe[][] outerBoard; 
+	//protected TicTacToe[][] outerBoard; 
 	
 	
 	
-	public UltimateTicTacToe() {
-		super(); //Calls all original data from TTT 
+	public UltimateTicTacToe(Player PlayerOne, Player PlayerTwo) {
+		super(PlayerOne, PlayerTwo); //Calls all original data from TTT 
 		size = 3;
-		outerBoard = new TicTacToe[3][3]; //Hard coded since TTT games are 3x3 
-		initializeOuterBoard();
+		board = new TicTacToe[3][3]; //Hard coded since TTT games are 3x3
 		
 	}  
 	
@@ -48,36 +46,36 @@ public class UltimateTicTacToe extends TicTacToe {
 		System.out.println("Your placement in the inner board determines which OUTER board your opponent will start in. \n"); 
 		System.out.println("Get TicTacToe in the OUTER (and INNER) boards to WIN! Strategize carefully! \n\n\n"); 
 		
-		System.out.println("To start, " + currentPlayer +  " can choose any inner board."); 
+		System.out.println("To start, " + currentPlayer.getName() +  " can choose any inner board."); 
 		
-//		initializeOuterBoard();
+		initializeOuterBoard();
 		printOuterBoard();     //print board
-		System.out.println("It is " + currentPlayer + "'s turn.");
+		System.out.println("It is " + currentPlayer.getName() + "'s turn.");
 		//Get input.
 		int row, col; 
 		do { //Throws exceptions for invalid input (by making all invalids -1)
 			try {
-				row = getOuterBoardRow();
-			} catch (UTTT_Exception ttte) {
+				row = getRow();
+			} catch (TicTacToeException ttte) {
 				System.out.println(ttte.getMessage());
 				row = -1;
 			}
 			try {
-				col = getOuterBoardCol();
-			} catch (UTTT_Exception ttte) {
+				col = getCol();
+			} catch (TicTacToeException ttte) {
 				System.out.println(ttte.getMessage());
 				col = -1;
 			}
-			if (row != -1 && col != -1 && isOuterOccupied(row, col)) {
+			if (row != -1 && col != -1 && isOccupied(row, col)) {
 				System.out.println("That location is occupied. Try again.");
 			}
 			
-		} while(row == -1 || col == -1 || isOuterOccupied(row, col)); 
+		} while(row == -1 || col == -1 || isOccupied(row, col)); 
 		
-		outerBoard[row][col].start(currentPlayer); //Starts turn of innerboard
+		((TicTacToe)board[row][col]).start(currentPlayer); //Starts turn of innerboard
 		
-		start_pos[0] = outerBoard[row][col].last_pos[0]; 
-		start_pos[1] = outerBoard[row][col].last_pos[1];
+		start_pos[0] = ((TicTacToe)board[row][col]).last_pos[0]; 
+		start_pos[1] = ((TicTacToe)board[row][col]).last_pos[1];
 		
 		changePlayer(); 
 		System.out.println("\n");  
@@ -92,34 +90,58 @@ public class UltimateTicTacToe extends TicTacToe {
 				do {
 					
 						printOuterBoard();     //print board
-						System.out.println("It is " + currentPlayer + "'s turn.");
+						System.out.println("It is " + currentPlayer.getName() + "'s turn.");
 						//Get input.
 						 
 						
 						row = start_pos[0]; 
 						col = start_pos[1]; 
+
+						System.out.println("It is " + currentPlayer.getName() + "'s turn."+((TicTacToe)board[row][col]).isOccupied(row, col));
+						System.out.println(((TicTacToe)board[row][col]).value);
 						
 						System.out.println("\n");
 						
 						//We have a valid row and column:
-						
+						if(!this.isOccupied(row, col)){
 						System.out.println("You will play in board (" + (row) + "," + col + ")." );
+						}
+						else{
+							do { //Throws exceptions for invalid input (by making all invalids -1)
+								try {
+									row = getRow();
+								} catch (TicTacToeException ttte) {
+									System.out.println(ttte.getMessage());
+									row = -1;
+								}
+								try {
+									col = getCol();
+								} catch (TicTacToeException ttte) {
+									System.out.println(ttte.getMessage());
+									col = -1;
+								}
+								if (row != -1 && col != -1 && isOccupied(row, col)) {
+									System.out.println("That location is occupied. Try again.");
+								}
+								
+							} while(row == -1 || col == -1 || isOccupied(row, col)); 
+						}
 						
-						outerBoard[row][col].start(currentPlayer); //Starts turn of innerboard
+						((TicTacToe)board[row][col]).start(currentPlayer); //Starts turn of innerboard
 						
 						//Does the program need to "wait" until .start() finishes?
 						
 						//Changes next start_pos
-						start_pos[0] = outerBoard[row][col].last_pos[0]; 
+						start_pos[0] = ((TicTacToe)board[row][col]).last_pos[0]; 
 						System.out.println("start_pos[0] = " + start_pos[0] + "\n" );
 
-						start_pos[1] = outerBoard[row][col].last_pos[1]; 
+						start_pos[1] = ((TicTacToe)board[row][col]).last_pos[1]; 
 						System.out.println("start_pos[1] = " + start_pos[1] + "\n" );
 						
-						this.win = isOuterWinner(); //Win condition 
+						this.win = isWinner(); //Win condition 
 						
 						if (this.win) {  //Win condition check
-							System.out.println("Congratulations! " + currentPlayer + " wins the game!!!");  
+							System.out.println("Congratulations! " + currentPlayer.getName() + " wins the game!!!");  
 							
 //							//Setting TTT char value (VITAL): 
 //							value = currentPlayer;
@@ -141,7 +163,7 @@ public class UltimateTicTacToe extends TicTacToe {
 	public void initializeOuterBoard() {
 		for(int r = 0; r < size; r++) {
 			for(int c = 0; c < size; c++) {
-				outerBoard[r][c] = new TicTacToe();
+				board[r][c] = new TicTacToe(playerOne, playerTwo);
 			}
 		}
 	} 
@@ -162,7 +184,7 @@ public class UltimateTicTacToe extends TicTacToe {
 				for(int r = 0; r < this.size; r++) {
 					
 					//Params fixed from Andi's code
-					TicTacToe O_Hold = outerBoard[R][r]; //Is making new TTTs a memory leak...?
+					TicTacToe O_Hold = (TicTacToe) board[R][r]; //Is making new TTTs a memory leak...?
 					System.out.print("|"); //Initial line
 					
 					//InnerBoard Column
@@ -176,14 +198,9 @@ public class UltimateTicTacToe extends TicTacToe {
 						O_Hold.board[C][c].y = c; 
 						
 						//Assign OUTER Space pos
-						O_Hold.board[R][r].Out_x = R; 
-						O_Hold.board[R][r].Out_y = r; 
-						
-						//Show Space
-//						VBox vbox = new VBox(); 
-//						pane 
-
-						
+						O_Hold.board[C][c].Out_x = R; 
+						O_Hold.board[C][c].Out_y = r;
+						 
 						//These might be useful for JavaFX. DO NOT DELETE (yet..) 
 						//Ex: Once all each spaces are rendered, we can highlight entire OUTER Board using Out_x and Out_y w/ mouse hovers. 
 						// From there, we can ONLY highlight spaces from an inner board with x and y.
@@ -228,31 +245,33 @@ public class UltimateTicTacToe extends TicTacToe {
 	 * @return valid row
 	 * @throws UTTT_Exception : When row is out of bounds
 	 */
-	public int getOuterBoardRow() throws UTTT_Exception {
+	/* 
+	public int getRow() throws TicTacToeException {
 		System.out.print("Please enter a valid Outer Board row: ");
 		int row = input.nextInt();
 		if (row >= this.size || row < 0) {
-			throw new UTTT_Exception("Invalid Board Row: " + row);
+			throw new TicTacToeException("Invalid Board Row: " + row);
 		}
 		return row;
 	}
-	
+	*/
 	/**
 	 * 
 	 * @return valid column
 	 * @throws UTTT_Exception : When column is out of bounds
 	 */
-	public int getOuterBoardCol() throws UTTT_Exception {
+	/* 
+	public int getCol() throws TicTacToeException {
 		System.out.print("Please enter a valid Outer Board column: ");
 		
 		int col = input.nextInt();
 		
 		if (col >= this.size || col < 0) {
-			throw new UTTT_Exception("Invalid Board Column: " + col);
+			throw new TicTacToeException("Invalid Board Column: " + col);
 		}
 		return col;
 	} 
-	
+	*/
 	
 	/**
 	 * 
@@ -260,9 +279,9 @@ public class UltimateTicTacToe extends TicTacToe {
 	 * @param col
 	 * @return : if board is occupied (won) (T or F)
 	 */
-	public boolean isOuterOccupied(int row, int col) {
-		return outerBoard[row][col].value == 'x' || outerBoard[row][col].value == 'o';
-	} 
+	//public boolean isOuterOccupied(int row, int col) {
+	//	return outerBoard[row][col].value == 'x' || outerBoard[row][col].value == 'o';
+	//} 
 	
 	
 	/**
@@ -271,7 +290,7 @@ public class UltimateTicTacToe extends TicTacToe {
 	 */ 
 	
 	//will currentPlayer's need to be this.currentPlayer ...? 
-	
+	/* 
 	public boolean isOuterWinner() {
 		//sum checks
 		int sum;
@@ -279,7 +298,7 @@ public class UltimateTicTacToe extends TicTacToe {
 		for(int row = 0; row < size; row++) {
 			sum = 0;
 			for(int col = 0; col < size; col++) {
-				if (outerBoard[row][col].value == currentPlayer) {
+				if (((TicTacToe)board[row][col]).value == currentPlayer.getSymbol()) {
 					sum++;
 				}
 			}
@@ -292,7 +311,7 @@ public class UltimateTicTacToe extends TicTacToe {
 		for(int col = 0; col < size; col++) {
 			sum = 0;
 			for(int row = 0; row < size; row++) {
-				if (outerBoard[row][col].value == currentPlayer) {
+				if (((TicTacToe)board[row][col]).value == currentPlayer.getSymbol()) {
 					sum++;
 				}
 			}
@@ -302,16 +321,16 @@ public class UltimateTicTacToe extends TicTacToe {
 		//check minor diagonal
 		sum = 0;
 		for(int i = 0; i < size; i++) {
-			if (outerBoard[i][i].value == currentPlayer) sum++;
+			if (((TicTacToe)board[i][i]).value == currentPlayer.getSymbol()) sum++;
 		}
 		if (sum == size) return true;
 		sum = 0;
 		for(int i = 0; i < size; i++) {
-			if (outerBoard[size-i-1][i].value == currentPlayer) sum++; //size-i-1 decreases row position with i++
+			if (((TicTacToe)board[i][i]).value == currentPlayer.getSymbol()) sum++; //size-i-1 decreases row position with i++
 		}		
 		return sum == size;		
 	} 
-	
+	*/
 	
 	
 	
@@ -319,24 +338,25 @@ public class UltimateTicTacToe extends TicTacToe {
 	 * Checks if all boards are occupied. Must run directly after isOuterWinner()
 	 * @return : T if ALL spaces are occupied. F otherwise.
 	 */
+	/* 
 	public boolean isOuterDraw() {
 		for(int row = 0; row < size; row++) {			
 			for(int col = 0; col < size; col++) {
-				if (outerBoard[row][col].value == '_') return false;
+				if (((TicTacToe)board[row][col]).value == '_') return false;
 			}
 		}
 		//if we are here, all spaces are occupied
 		return true;
 	} 
-	
+	*/
 	
 	/**
 	 * Switches player char (x or o)
 	 */
-	public void changeOuterPlayer() {
-		if (currentPlayer == 'x') currentPlayer = 'o';
-		else currentPlayer = 'x';
-	}
+	//public void changeOuterPlayer() {
+	//	if (currentPlayer == 'x') currentPlayer = 'o';
+	//	else currentPlayer = 'x';
+	//}
 	
 	
 	

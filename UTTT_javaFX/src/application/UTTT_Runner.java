@@ -1,5 +1,13 @@
 package application;
-	
+import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
+
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -7,27 +15,37 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 
 
 public class UTTT_Runner extends Application {
 	
-	public static UltimateTicTacToe ttt = new UltimateTicTacToe(); 
-	//Initializes board once made.
-	
 	public static void main(String[] args) {
-		launch(args); 
+		launch(args);
+		Scanner input= new Scanner(System.in);
+		Player PlayerOne=new HumanPlayer("Andi", 'x', 0);
+		Player PlayerTwo=new AIPlayer('o', 10);
+		
+		
+		//try {
+		//	simonReadFile(PlayerTwo);
+		//} catch (Exception e) {
+		//	System.out.println("Gaming");
+		//}
+
 		
 		
 		
-		// TODO Auto-generated method stub
-//		UltimateTicTacToe ttt = new UltimateTicTacToe();
-			
-			ttt.UTTT_start();  
+		//System.out.println("Enter 1 for AI, enter 2 for human Player");
+		
+		//if(input.nextInt()==1){
 			
 
+		//}
+		
+		// TODO Auto-generated method stub
+		UltimateTicTacToe ttt = new UltimateTicTacToe(PlayerOne, PlayerTwo);
+			ttt.UTTT_start(); 
 //			ttt.UTTT_loop(); 
 		
 		do {
@@ -39,6 +57,45 @@ public class UTTT_Runner extends Application {
 
 	}
 	
+
+
+
+
+	public static void simonWriteToFile(Player player) throws FileNotFoundException, IOException{
+		ObjectOutputStream OOS= new ObjectOutputStream(new FileOutputStream("Simon.bin"));
+		OOS.writeObject(player);
+	}
+	public static void playerOneWriteToFile(Player player) throws FileNotFoundException, IOException{
+		ObjectOutputStream OOS= new ObjectOutputStream(new FileOutputStream("PlayerOne.bin"));
+		OOS.writeObject(player);
+	}
+	public static void playerTwoWriteToFile(Player player) throws FileNotFoundException, IOException{
+		ObjectOutputStream OOS= new ObjectOutputStream(new FileOutputStream("PlayerTwo.bin"));
+		OOS.writeObject(player);
+	}
+
+	public static void simonReadFile(Player player) throws FileNotFoundException, IOException, ClassNotFoundException{
+		ObjectInputStream OIS= new ObjectInputStream(new FileInputStream("Simon.bin"));
+		Player gaming=(Player) OIS.readObject();
+		System.out.println(gaming.getName());
+		System.out.println(gaming.getSymbol());
+		System.out.println(gaming.getWins());
+
+		
+	}
+	public static void OneReadFile(Player player) throws FileNotFoundException, IOException, ClassNotFoundException{
+		ObjectInputStream OIS= new ObjectInputStream(new FileInputStream("PlayerOne.bin"));
+		Player gaming=(Player) OIS.readObject();
+		
+	}
+	public static void TwoReadFile(Player player) throws FileNotFoundException, IOException, ClassNotFoundException{
+		ObjectInputStream OIS= new ObjectInputStream(new FileInputStream("PlayerTwo.bin"));
+		Player gaming=(Player) OIS.readObject();
+		
+	}
+
+
+
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -52,83 +109,52 @@ public class UTTT_Runner extends Application {
 			primaryStage.setScene(stage);
 			primaryStage.setTitle("Ultimate Tic-Tac-Toe!");
 			
-			
-			
-			
-			
-//			//Cols
-//			Label col1 = new Label("Col 1");
-//			Label col2 = new Label("Col 2");
-//			Label col3 = new Label("Col 3");
-//			Label col4 = new Label("Col 4");
-//			Label col5 = new Label("Col 5");
-//			Label col6 = new Label("Col 6");
-//			Label col7 = new Label("Col 7");
-//			Label col8 = new Label("Col 8");
-//			Label col9 = new Label("Col 9");
-//			//Rows
-//			Label row1 = new Label("Row 1");
-//			Label row2 = new Label("Row 2");
-//			Label row3 = new Label("Row 3");
-//			Label row4 = new Label("Row 4");
-//			Label row5 = new Label("Row 5");
-//			Label row6 = new Label("Row 6");
-//			Label row7 = new Label("Row 7");
-//			Label row8 = new Label("Row 8");
-//			Label row9 = new Label("Row 9");
-			Button testButton = new Button("Start game?"); 
-			
-			
+			//Cols
+			Label col1 = new Label("Col 1");
+			Label col2 = new Label("Col 2");
+			Label col3 = new Label("Col 3");
+			Label col4 = new Label("Col 4");
+			Label col5 = new Label("Col 5");
+			Label col6 = new Label("Col 6");
+			Label col7 = new Label("Col 7");
+			Label col8 = new Label("Col 8");
+			Label col9 = new Label("Col 9");
+			//Rows
+			Label row1 = new Label("Row 1");
+			Label row2 = new Label("Row 2");
+			Label row3 = new Label("Row 3");
+			Label row4 = new Label("Row 4");
+			Label row5 = new Label("Row 5");
+			Label row6 = new Label("Row 6");
+			Label row7 = new Label("Row 7");
+			Label row8 = new Label("Row 8");
+			Label row9 = new Label("Row 9");
+			Button testButton = new Button("Start game?");
 
 			GridPane pane = new GridPane();
 			pane.setHgap(30);
-			pane.setVgap(30);  
+			pane.setVgap(30);
+			
+			pane.add(col1, 0, 0);
+			pane.add(col2, 1, 0);
+			pane.add(col3, 2, 0);
+			pane.add(col4, 3, 0);
+			pane.add(col5, 4, 0);
+			pane.add(col6, 5, 0);
+			pane.add(col7, 6, 0);
+			pane.add(col8, 7, 0);
+			pane.add(col9, 8, 0);
 			
 			
-
-//			pane.add(vbox, ttt.outerBoard[(R*3) + k], ttt.outerBoard[(j*3) + l]);
-			
-			//Prints all 81 spaces
-			for (int R=0; R < ttt.size; R++ ) {
-				
-				for (int C=0; C < ttt.size; C++ ) {
-					
-					for (int r=0; r < ttt.size; r++ ) {
-						
-						for (int c=0; c < ttt.size; c++ ) {
-							Label space = new Label(""+ttt.outerBoard[R][r].board[C][c].value);
-							VBox vbox = new VBox(space);
-							pane.add(vbox, (R*3)+C, (r*3)+c); //Programmatically accommodates 0 to 8 
-						}
-					}
-				} 
-			}
-				 
-			
-			
-			
-			
-//			pane.add(col1, 0, 0);
-//			pane.add(col2, 1, 0);
-//			pane.add(col3, 2, 0);
-//			pane.add(col4, 3, 0);
-//			pane.add(col5, 4, 0);
-//			pane.add(col6, 5, 0);
-//			pane.add(col7, 6, 0);
-//			pane.add(col8, 7, 0);
-//			pane.add(col9, 8, 0);
-//			
-//			
-//			pane.add(row1, 0, 0);
-//			pane.add(row2, 0, 1);
-//			pane.add(row3, 0, 2);
-//			pane.add(row4, 0, 3);
-//			pane.add(row5, 0, 4);
-//			pane.add(row6, 0, 5);
-//			pane.add(row7, 0, 6);
-//			pane.add(row8, 0, 7);
-//			pane.add(row9, 0, 8); 
-			
+			pane.add(row1, 0, 0);
+			pane.add(row2, 0, 1);
+			pane.add(row3, 0, 2);
+			pane.add(row4, 0, 3);
+			pane.add(row5, 0, 4);
+			pane.add(row6, 0, 5);
+			pane.add(row7, 0, 6);
+			pane.add(row8, 0, 7);
+			pane.add(row9, 0, 8);
 			
 			
 			pane.add(testButton, 9, 5);
@@ -140,8 +166,6 @@ public class UTTT_Runner extends Application {
 		
 		} catch(Exception e) {
 			e.printStackTrace();
-		} 
-		
-		
+		}
 	}
 }

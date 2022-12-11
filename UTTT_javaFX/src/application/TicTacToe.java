@@ -1,8 +1,10 @@
-package application;
+package application; 
 
 import java.util.Scanner;
 
-
+/**
+ * 
+ */
 /**
  * TicTacToe (abbreviation as TTT) is AN instance AND composition of space. 
  * It's composed of Spaces to make the logic of a TTT game. 
@@ -10,19 +12,30 @@ import java.util.Scanner;
  * @author Savion
  *
  */
-public class TicTacToe extends Space {
+public class TicTacToe extends Space{
 
 	/**
 	 * Creates a 2D Array of spaces 
 	 */
 	protected Space[][] board; 
 	
+
 	protected int[] last_pos = new int[2]; 
-	
+
 	/**
-	 * The character of the current Player
+	 * The first player
 	 */
-	protected char currentPlayer; 
+	protected Player playerOne;
+	/**
+	 * The second player
+	 */
+
+	protected Player playerTwo;
+
+	/**
+	 * The current Player
+	 */
+	protected Player currentPlayer; 
 	
 	/**
 	 * The size of the board (hard coded to 3 in runner since that's standard for TTT boards)
@@ -50,19 +63,21 @@ public class TicTacToe extends Space {
 	 * 
 	 * @param n : 
 	 */
-	public TicTacToe() {
+	public TicTacToe(Player PlayerOne, Player PlayerTwo) {
 		super();
 		size = 3;
 		board = new Space[3][3]; //Creates 2D array
 		initializeBoard(); //Creates blank board spaces in array
-		currentPlayer = 'x';
+		playerOne=PlayerOne;
+		playerTwo=PlayerTwo;
+		currentPlayer = playerOne;
 		input = new Scanner(System.in); //For user input
 	}
 	
 	/**
 	 * Starts the game
 	 */
-	public void start(char player) { 
+	public void start(Player player) { 
 		currentPlayer = player;
 		//Game Logic.
 //		System.out.println("Welcome to CSC330 Tic Tac Toe!");
@@ -72,7 +87,7 @@ public class TicTacToe extends Space {
 		if(!win && !isDraw() && continue_game == true) {
 			
 				printBoard();     //print board
-				System.out.println("It is " + currentPlayer + "'s turn.");
+				System.out.println("It is " + currentPlayer.getName() + "'s turn.");
 				//Get input.
 				int row, col; 
 				do { //Throws exceptions for invalid input (by making all invalids -1)
@@ -102,19 +117,19 @@ public class TicTacToe extends Space {
 				last_pos[0] = row; 
 				last_pos[1] = col;
 				
-				board[row][col].value = currentPlayer; //Marks position 
+				board[row][col].value = currentPlayer.getSymbol(); //Marks position 
 				
 				
 				win = isWinner(); //Win condition 
 				
 				if (win) {  //Win condition check
-					System.out.println( currentPlayer + " wins this board! \n");  
+					System.out.println( currentPlayer.getName() + " wins this board! \n");  
 					
 					//Play win sound
 					
 					System.out.println("This board is now occupied. You cannot go back to it.");
 					//Setting TTT char value (VITAL): 
-					value = currentPlayer; 
+					value = currentPlayer.getSymbol(); 
 					continue_game = false;
 					
 				} else {
@@ -199,7 +214,7 @@ public class TicTacToe extends Space {
 	/**
 	 * Prints board to console
 	 */
-	public void printBoard() {	
+	public void printBoard(){	
 //		System.out.println("Here is the current board:\n");
 		
 		
@@ -226,12 +241,7 @@ public class TicTacToe extends Space {
 	 * @throws TicTacToeException : When row is out of bounds
 	 */
 	public int getRow() throws TicTacToeException {
-		System.out.print("Please enter a valid row: ");
-		int row = input.nextInt();
-		if (row >= size || row < 0) {
-			throw new TicTacToeException("Invalid row: " + row);
-		}
-		return row;
+		return currentPlayer.chooseValue("Row");
 	}
 	
 	/**
@@ -240,14 +250,8 @@ public class TicTacToe extends Space {
 	 * @throws TicTacToeException When column is out of bounds
 	 */
 	public int getCol() throws TicTacToeException {
-		System.out.print("Please enter a valid column: ");
 		
-		int col = input.nextInt();
-		
-		if (col >= size || col < 0) {
-			throw new TicTacToeException("Invalid column: " + col);
-		}
-		return col;
+		return currentPlayer.chooseValue("Column");
 	}
 	
 	/**
@@ -271,7 +275,7 @@ public class TicTacToe extends Space {
 		for(int row = 0; row < size; row++) {
 			sum = 0;
 			for(int col = 0; col < size; col++) {
-				if (board[row][col].value == currentPlayer) {
+				if (board[row][col].value == currentPlayer.getSymbol()) {
 					sum++;
 				}
 			}
@@ -284,7 +288,7 @@ public class TicTacToe extends Space {
 		for(int col = 0; col < size; col++) {
 			sum = 0;
 			for(int row = 0; row < size; row++) {
-				if (board[row][col].value == currentPlayer) {
+				if (board[row][col].value == currentPlayer.getSymbol()) {
 					sum++;
 				}
 			}
@@ -294,12 +298,12 @@ public class TicTacToe extends Space {
 		//check minor diagonal
 		sum = 0;
 		for(int i = 0; i < size; i++) {
-			if (board[i][i].value == currentPlayer) sum++;
+			if (board[i][i].value == currentPlayer.getSymbol()) sum++;
 		}
 		if (sum == size) return true;
 		sum = 0;
 		for(int i = 0; i < size; i++) {
-			if (board[size-i-1][i].value == currentPlayer) sum++; //size-i-1 decreases row position with i++
+			if (board[size-i-1][i].value == currentPlayer.getSymbol()) sum++; //size-i-1 decreases row position with i++
 		}		
 		return sum == size;		
 	}
@@ -322,8 +326,8 @@ public class TicTacToe extends Space {
 	 * Switches player char (x or o)
 	 */
 	public void changePlayer() {
-		if (currentPlayer == 'x') currentPlayer = 'o';
-		else currentPlayer = 'x';
+		if (currentPlayer == playerOne) currentPlayer = playerTwo;
+		else currentPlayer = playerOne;
 	}
 	
 }

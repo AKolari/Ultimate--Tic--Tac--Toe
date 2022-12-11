@@ -1,5 +1,6 @@
 package application;
 
+
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,9 +13,10 @@ import javafx.stage.Stage;
 
 public class TicTacToeRunner {
 
-	public static void main(String[] args) {
+	public static void main(String[] args, Player playerOne, Player playerTwo) {
 		// TODO Auto-generated method stub
-		TicTacToe ttt = new TicTacToe();
+		TicTacToe ttt = new TicTacToe(playerOne, playerTwo);
+		
 		
 		///Will run TTT for A SINGLE turn
 		//	ttt.start(); 
@@ -22,7 +24,7 @@ public class TicTacToeRunner {
 		
 		//Loops until finished:
 		do {
-			ttt.start('x');
+			ttt.start(playerOne);
 		} 
 		
 		while (ttt.getWin() == false);
