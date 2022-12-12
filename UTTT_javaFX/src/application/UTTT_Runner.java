@@ -132,6 +132,16 @@ public class UTTT_Runner extends Application {
 			pane.setHgap(30);  
 			pane.setVgap(30);
 			
+			GridPane gp0 = new GridPane();
+			GridPane gp1 = new GridPane();
+			GridPane gp2 = new GridPane(); 
+			GridPane gp3 = new GridPane();
+			GridPane gp4 = new GridPane();
+			GridPane gp5 = new GridPane();
+			GridPane gp6 = new GridPane();
+			GridPane gp7 = new GridPane();
+			GridPane gp8 = new GridPane();
+			
 //			Prints all 81 spaces
 			for (int R=0; R < 3; R++ ) {
 
