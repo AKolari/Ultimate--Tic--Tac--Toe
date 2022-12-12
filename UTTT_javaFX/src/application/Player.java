@@ -1,6 +1,11 @@
 package application;
 import java.io.Serializable;
 
+import java.io.Serializable;
+
+/**
+ * Player class is used to save player data and 
+ */
 public class Player implements Serializable, rowColumnInterface{
     private String name;
     private char symbol;    //Future iterations could potentially allow for the setting of custom icons. Unlikely to happen in this iteration.
@@ -31,11 +36,10 @@ public class Player implements Serializable, rowColumnInterface{
         this.wins = wins;
     }
 
-    public int chooseValue(String item) throws TicTacToeException{
-        return 0;
+    public int[] chooseValue(String item) throws TicTacToeException{
+        int[] blank=new int[2];
+        return blank ;
     }
-    
-
     
 
 

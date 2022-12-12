@@ -26,7 +26,7 @@ public class UltimateTicTacToe extends TicTacToe {
 		super(PlayerOne, PlayerTwo); //Calls all original data from TTT 
 		size = 3;
 		board = new TicTacToe[3][3]; //Hard coded since TTT games are 3x3
-		initializeOuterBoard();
+		
 	}  
 	
 	/**
@@ -48,22 +48,20 @@ public class UltimateTicTacToe extends TicTacToe {
 		
 		System.out.println("To start, " + currentPlayer.getName() +  " can choose any inner board."); 
 		
-//		initializeOuterBoard();
+		initializeOuterBoard();
 		printOuterBoard();     //print board
 		System.out.println("It is " + currentPlayer.getName() + "'s turn.");
 		//Get input.
+		int rowCol[]=new int[2];
 		int row, col; 
 		do { //Throws exceptions for invalid input (by making all invalids -1)
 			try {
-				row = getRow();
+				rowCol = getRowCol();
+				row=rowCol[0];
+				col=rowCol[1];
 			} catch (TicTacToeException ttte) {
 				System.out.println(ttte.getMessage());
 				row = -1;
-			}
-			try {
-				col = getCol();
-			} catch (TicTacToeException ttte) {
-				System.out.println(ttte.getMessage());
 				col = -1;
 			}
 			if (row != -1 && col != -1 && isOccupied(row, col)) {
@@ -85,8 +83,9 @@ public class UltimateTicTacToe extends TicTacToe {
 	
 	public void UTTT_loop() {
 //UTTT does board switching internally, so it uses a do while
-				
+
 				int row, col;
+				int rowCol[]=new int[2];
 				do {
 					
 						printOuterBoard();     //print board
@@ -109,15 +108,12 @@ public class UltimateTicTacToe extends TicTacToe {
 						else{
 							do { //Throws exceptions for invalid input (by making all invalids -1)
 								try {
-									row = getRow();
+									rowCol = getRowCol();
+									row=rowCol[0];
+									col=rowCol[1];
 								} catch (TicTacToeException ttte) {
 									System.out.println(ttte.getMessage());
 									row = -1;
-								}
-								try {
-									col = getCol();
-								} catch (TicTacToeException ttte) {
-									System.out.println(ttte.getMessage());
 									col = -1;
 								}
 								if (row != -1 && col != -1 && isOccupied(row, col)) {
