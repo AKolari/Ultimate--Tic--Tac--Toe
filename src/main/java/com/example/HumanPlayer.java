@@ -9,12 +9,18 @@ public class HumanPlayer extends Player{
 
 
     @Override
-    public int chooseValue(String item) throws TicTacToeException{
+    public int[] chooseValue(String item) throws TicTacToeException{
         Scanner input=new Scanner(System.in);
-        System.out.print("Please enter a valid " +item+": ");
-		int value = input.nextInt();
-		if (value >= 2 || value < 0) {
-			throw new TicTacToeException("Invalid " +item+": " + value);
+        System.out.print("Please enter a valid Row: ");
+        int value[]=new int[2];
+		value[0] = input.nextInt();
+		if (value[0] >= 3 || value[0] < 0) {
+			throw new TicTacToeException("Invalid Row: " + value);
+		}
+        System.out.print("Please enter a valid Column: ");
+		value[1] = input.nextInt();
+		if (value[1] >= 3 || value[1] < 0) {
+			throw new TicTacToeException("Invalid Column: " + value);
 		}
 		return value;
     }

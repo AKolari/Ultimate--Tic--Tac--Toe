@@ -52,18 +52,16 @@ public class UltimateTicTacToe extends TicTacToe {
 		printOuterBoard();     //print board
 		System.out.println("It is " + currentPlayer.getName() + "'s turn.");
 		//Get input.
+		int rowCol[]=new int[2];
 		int row, col; 
 		do { //Throws exceptions for invalid input (by making all invalids -1)
 			try {
-				row = getRow();
+				rowCol = getRowCol();
+				row=rowCol[0];
+				col=rowCol[1];
 			} catch (TicTacToeException ttte) {
 				System.out.println(ttte.getMessage());
 				row = -1;
-			}
-			try {
-				col = getCol();
-			} catch (TicTacToeException ttte) {
-				System.out.println(ttte.getMessage());
 				col = -1;
 			}
 			if (row != -1 && col != -1 && isOccupied(row, col)) {
@@ -85,8 +83,9 @@ public class UltimateTicTacToe extends TicTacToe {
 	
 	public void UTTT_loop() {
 //UTTT does board switching internally, so it uses a do while
-				
+
 				int row, col;
+				int rowCol[]=new int[2];
 				do {
 					
 						printOuterBoard();     //print board
@@ -109,15 +108,12 @@ public class UltimateTicTacToe extends TicTacToe {
 						else{
 							do { //Throws exceptions for invalid input (by making all invalids -1)
 								try {
-									row = getRow();
+									rowCol = getRowCol();
+									row=rowCol[0];
+									col=rowCol[1];
 								} catch (TicTacToeException ttte) {
 									System.out.println(ttte.getMessage());
 									row = -1;
-								}
-								try {
-									col = getCol();
-								} catch (TicTacToeException ttte) {
-									System.out.println(ttte.getMessage());
 									col = -1;
 								}
 								if (row != -1 && col != -1 && isOccupied(row, col)) {

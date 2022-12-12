@@ -1,5 +1,5 @@
 package com.example;
-
+import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -59,7 +59,10 @@ public class TicTacToe extends Space{
 	
 	/**
 	 * 
-	 * @param n : 
+	 * Constructor for tic-tac-toe
+	 * 
+	 * @param PlayerOne
+	 * @param PlayerTwo
 	 */
 	public TicTacToe(Player PlayerOne, Player PlayerTwo) {
 		super();
@@ -87,18 +90,16 @@ public class TicTacToe extends Space{
 				printBoard();     //print board
 				System.out.println("It is " + currentPlayer.getName() + "'s turn.");
 				//Get input.
+				int rowCol[]=new int[2];
 				int row, col; 
 				do { //Throws exceptions for invalid input (by making all invalids -1)
 					try {
-						row = getRow();
+						rowCol = getRowCol();
+						row=rowCol[0];
+						col=rowCol[1];
 					} catch (TicTacToeException ttte) {
 						System.out.println(ttte.getMessage());
 						row = -1;
-					}
-					try {
-						col = getCol();
-					} catch (TicTacToeException ttte) {
-						System.out.println(ttte.getMessage());
 						col = -1;
 					}
 					if (row != -1 && col != -1 && isOccupied(row, col)) {
@@ -238,8 +239,9 @@ public class TicTacToe extends Space{
 	 * @return valid row
 	 * @throws TicTacToeException : When row is out of bounds
 	 */
-	public int getRow() throws TicTacToeException {
+	public int[] getRowCol() throws TicTacToeException {
 		return currentPlayer.chooseValue("Row");
+
 	}
 	
 	/**
@@ -247,10 +249,10 @@ public class TicTacToe extends Space{
 	 * @return valid column
 	 * @throws TicTacToeException When column is out of bounds
 	 */
-	public int getCol() throws TicTacToeException {
+	//public int getCol() throws TicTacToeException {
 		
-		return currentPlayer.chooseValue("Column");
-	}
+	//	return currentPlayer.chooseValue("Column");
+	//}
 	
 	/**
 	 * 

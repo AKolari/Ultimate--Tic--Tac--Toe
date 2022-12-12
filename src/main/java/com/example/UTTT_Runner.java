@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 public class UTTT_Runner extends Application {
 	
 	public static void main(String[] args) {
-		launch(args);
+		//launch(args);
 		Scanner input= new Scanner(System.in);
 		Player PlayerOne=new HumanPlayer("Andi", 'x', 0);
 		Player PlayerTwo=new AIPlayer('o', 10);
