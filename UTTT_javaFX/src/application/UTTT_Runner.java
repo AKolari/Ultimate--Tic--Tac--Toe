@@ -1,5 +1,6 @@
 package application;
 import java.util.Scanner;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
@@ -13,11 +14,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
 import javafx.scene.layout.VBox; 
+
+import javafx.event.EventHandler;
+import javafx.event.ActionEvent;
 
 public class UTTT_Runner extends Application { 
 	
@@ -141,9 +145,33 @@ public class UTTT_Runner extends Application {
 				} 
 			}
 			
+//			VBox selection = new VBox(turn, rowText, colText, select);
+			
+//			selection.setAlignment(Pos.BOTTOM_CENTER);
+			
+//			pane.add(selection, 9, 9);
+			
+			Label turn = new Label("Player " +ttt.currentPlayer.getName() +"'s turn.");
+			Label colText = new Label("Enter Column");
+			Label rowText = new Label("Enter Row");
+			final TextField colField;
+			final TextField rowField;
+			
+			Button select = new Button("Choose Coordinates");
+			
+		      select.setOnAction(new selectionHandler());
 			
 			
+			colField= new TextField();
+			rowField = new TextField();
 			
+			pane.add(turn, 9, 0);
+			pane.add(rowText, 10, 1);
+			pane.add(rowField, 9, 1);
+			pane.add(colText, 10, 2);
+			pane.add(colField, 9, 2);
+			pane.add(select, 9, 3);
+		
 			pane.setAlignment(Pos.CENTER);
 			Scene scene = new Scene(pane,700,700);
 			primaryStage.setScene(scene);
@@ -153,4 +181,24 @@ public class UTTT_Runner extends Application {
 			e.printStackTrace();
 		}
 	}
+}
+
+/**
+ * When the button is pressed it will read from the two text fields and put either an X/O
+ * In the Col/Row's
+ * Once that happens, change player.
+ * @author Steven
+ *
+ */
+ class selectionHandler implements EventHandler<ActionEvent> {
+
+	@Override
+	public void handle(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+		
+
+		
+	}
+
 }
