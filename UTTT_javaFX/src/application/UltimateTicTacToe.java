@@ -10,7 +10,14 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.Screen;
 
-
+/**
+ * Creates Ultimate TTT by being composed of 9 TTT boards and applying TTT logic. \
+ * Unlike TTT, UTTT  determines board placement based on the previous moves. 
+ * The game is started in the center board, and the placement from that board determines the next boards. 
+ * UTTT_start() SHOULD run BEFORE UTTT_loop in the runner .
+ * @author Savion
+ *
+ */
 public class UltimateTicTacToe extends TicTacToe {
 	
 	/**
@@ -25,18 +32,19 @@ public class UltimateTicTacToe extends TicTacToe {
 	public UltimateTicTacToe(Player PlayerOne, Player PlayerTwo) {
 		super(PlayerOne, PlayerTwo); //Calls all original data from TTT 
 		size = 3;
-		board = new TicTacToe[3][3]; //Hard coded since TTT games are 3x3
+		board = new TicTacToe[3][3]; //Hard coded since all TTT games are 3x3
 		initializeOuterBoard(); 
 	}  
 	
-	/**
-	 * Unlike TTT, UTTT  determines board placement based on the previous moves. 
-	 * The game is started in the center board, and the placement from that board determines the next boards. 
-	 * UTTT_start() SHOULD run before UTTT_loop in the runner 
-	 */
 	
+	/**
+	 * Holds the starting position in an inner board, based on a previous move
+	 */
 	private int[] start_pos = new int[2]; 
 	
+	/**
+	 * Begins the game by explaining the rules and places the first player in the center board
+	 */
 	public void UTTT_start() {
 		
 		
@@ -81,6 +89,9 @@ public class UltimateTicTacToe extends TicTacToe {
 		
 	}
 	
+	/**
+	 * Allows players to take turns choosing spaces and throws exceptions when needed
+	 */
 	public void UTTT_loop() {
 //UTTT does board switching internally, so it uses a do while
 
@@ -156,6 +167,9 @@ public class UltimateTicTacToe extends TicTacToe {
 	} //End of UTTT_start
 	
 
+	/**
+	 * Instantiates TTT boards for play
+	 */
 	public void initializeOuterBoard() {
 		for(int r = 0; r < size; r++) {
 			for(int c = 0; c < size; c++) {
@@ -167,9 +181,7 @@ public class UltimateTicTacToe extends TicTacToe {
 	
 	/**
 	 * Prints boards to console
-	 */
-	
-		
+	 */	
 	public void printOuterBoard() {
 		for (int R = 0; R < 3; R++) { 
 			
@@ -232,7 +244,8 @@ public class UltimateTicTacToe extends TicTacToe {
 	
 	
 	
-	
+//OLD CODE BELOW: Andi simplified the relationship between Space, TicTacToe and UltimateTicTac Toe. 
+//The code below is no longer relevant
 	
 	
 	

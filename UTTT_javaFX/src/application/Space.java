@@ -6,10 +6,16 @@ import javafx.scene.control.Label;
 /**
  * 
  * @author Savion
- *	Space is the most basic unit of play in UTTT. 
+ *	
+ */ 
+
+/**
+ * 
+ *  Space is the most basic unit of play in UTTT. 
  *	A player can put their character in a space. 
  *	UTTT logic is handled by other classes using the char value. 
  *	For JavaFX, each space can be matched 
+ *
  */
 public class Space { 
 	/**
@@ -43,5 +49,8 @@ public class Space {
 	 */
 	protected int Out_y; 
 	
+	/**
+	 * Label originally used for JavaFX
+	 */
 	protected Label space_b = new Label(""+value);
 }

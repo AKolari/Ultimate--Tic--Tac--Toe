@@ -23,6 +23,14 @@ import javafx.scene.layout.VBox;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 
+
+/**
+ * Creates TTT game and shows leaderboard from player serialization 
+ * We were not able to get a functioning display of the game in JavaFX. :( 
+ * We were constantly running into rendering issues and didn't have time to finish due to work in other courses. 
+ * @author Savion, Andi and Steven
+ *
+ */
 public class UTTT_Runner extends Application { 
 	
 	
@@ -117,20 +125,49 @@ public class UTTT_Runner extends Application {
 
 
 	
-//Object Serialization
+//Object Serialization 
+	
+	/**
+	 * Saves cpu data (default name is simon)
+	 * @param player
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public static void simonWriteToFile(Player player) throws FileNotFoundException, IOException{
 		ObjectOutputStream OOS= new ObjectOutputStream(new FileOutputStream("Simon.bin"));
 		OOS.writeObject(player);
 	}
+	
+	/**
+	 * Saves Player1 data
+	 * @param player
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public static void playerOneWriteToFile(Player player) throws FileNotFoundException, IOException{
 		ObjectOutputStream OOS= new ObjectOutputStream(new FileOutputStream("PlayerOne.bin"));
 		OOS.writeObject(player);
-	}
+	} 
+	
+	
+	/**
+	 * Saves Player1 data
+	 * @param player
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public static void playerTwoWriteToFile(Player player) throws FileNotFoundException, IOException{
 		ObjectOutputStream OOS= new ObjectOutputStream(new FileOutputStream("PlayerTwo.bin"));
 		OOS.writeObject(player);
 	}
 
+	/**
+	 * Saves reads CPU data (default name is simon)
+	 * @param player
+	 * @throws FileNotFoundException
+	 * @throws IOException 
+	 * @return Player data
+	 */
 	public static Player simonReadFile() throws FileNotFoundException, IOException, ClassNotFoundException{
 		ObjectInputStream OIS= new ObjectInputStream(new FileInputStream("Simon.bin"));
 		Player gaming=(Player) OIS.readObject();
@@ -138,14 +175,29 @@ public class UTTT_Runner extends Application {
 //		System.out.println(gaming.getSymbol());
 //		System.out.println(gaming.getWins()); 
 		return gaming;
-
-		
-	}
+	
+	} 
+	
+	/**
+	 * Saves reads Player1 data
+	 * @param player
+	 * @throws FileNotFoundException
+	 * @throws IOException 
+	 * @return Player data
+	 */
 	public static Player OneReadFile() throws FileNotFoundException, IOException, ClassNotFoundException{
 		ObjectInputStream OIS= new ObjectInputStream(new FileInputStream("PlayerOne.bin"));
 		Player gaming=(Player) OIS.readObject();
 		return gaming;
-	}
+	} 
+	
+	/**
+	 * Saves reads Player2 data
+	 * @param player
+	 * @throws FileNotFoundException
+	 * @throws IOException 
+	 * @return Player data
+	 */
 	public static Player TwoReadFile() throws FileNotFoundException, IOException, ClassNotFoundException{
 		ObjectInputStream OIS= new ObjectInputStream(new FileInputStream("PlayerTwo.bin"));
 		Player gaming=(Player) OIS.readObject(); 
@@ -154,7 +206,9 @@ public class UTTT_Runner extends Application {
 	}
 
 
-
+	/**
+	 * Creates JavaFX window
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -332,13 +386,13 @@ public class UTTT_Runner extends Application {
 		}
 }
 
-/**
- * When the button is pressed it will read from the two text fields and put either an X/O
- * In the Col/Row's
- * Once that happens, change player.
- * @author Steven
- *
- */
- 
+///**
+// * When the button is pressed it will read from the two text fields and put either an X/O
+// * In the Col/Row's
+// * Once that happens, change player.
+// * @author Steven
+// *
+// */
+// 
 
 } //END OF UTTT_Runner
