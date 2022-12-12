@@ -120,7 +120,9 @@ import javafx.scene.control.Label;
 					last_pos[0] = row; 
 					last_pos[1] = col;
 					
-					board[row][col].value = currentPlayer.getSymbol(); //Marks position 
+					//Sets value
+					board[row][col].value = currentPlayer.getSymbol(); //Marks position  
+					board[row][col].space_b.setText(""+currentPlayer.getSymbol());
 					
 					
 					win = isWinner(); //Win condition 

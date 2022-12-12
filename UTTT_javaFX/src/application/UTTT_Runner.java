@@ -26,7 +26,7 @@ import javafx.event.ActionEvent;
 public class UTTT_Runner extends Application { 
 	
 	
-	public static Player PlayerOne=new HumanPlayer("Andi", 'x', 0);
+	public static Player PlayerOne=new AIPlayer('x', 0);
 	public static Player PlayerTwo=new AIPlayer('o', 10);
 	public static UltimateTicTacToe ttt;  
 	
@@ -141,7 +141,10 @@ public class UTTT_Runner extends Application {
 
 						for (int c=0; c < 3; c++ ) {  
 							
-							VBox vbox = new VBox(((TicTacToe)ttt.board[R][r]).board[C][c].space_b);
+							VBox vbox = new VBox(
+									((TicTacToe)ttt.board[R][r]).board[C][c].space_b
+									
+									);
 							pane.add(vbox, (R*3)+C, (r*3)+c); //Programmatically accommodates 0 to 8 
 						}
 					}
@@ -190,8 +193,17 @@ public class UTTT_Runner extends Application {
 
 		@Override
 		public void handle(ActionEvent event) { 
-			String x_input = rowField.getText(); 
-			String y_input = colField.getText();
+			int x_input = Integer.parseInt(rowField.getText()); 
+			int y_input = Integer.parseInt(colField.getText());  
+			
+//			((AIPlayer)ttt.currentPlayer).setValue(x_input,y_input);  
+			
+			
+			
+			
+//			(HumanPlayer)ttt.((HumanPlayer)currentPlayer).setValue(x_input,y_input);  
+			
+		
 	
 		}
 }
