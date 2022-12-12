@@ -13,7 +13,11 @@ public class HumanPlayer extends Player{
     public int chooseValue(String item) throws TicTacToeException{
         Scanner input=new Scanner(System.in);
         System.out.print("Please enter a valid " +item+": ");
-		int value = input.nextInt();
+		
+        
+        
+        int value = input.nextInt();
+		
 		if (value >= 3 || value < 0) {
 			throw new TicTacToeException("Invalid " +item+": " + value);
 		}

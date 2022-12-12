@@ -1,5 +1,8 @@
 package application;
 
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+
 /**
  * 
  * @author Savion
@@ -38,5 +41,7 @@ public class Space {
 	 * On a non-cartesian plane. Y=0 is not the center. 
 	 * Will share this value with 8 other spaces.
 	 */
-	protected int Out_y;
+	protected int Out_y; 
+	
+	protected Label space_b = new Label(""+value);
 }

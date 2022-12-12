@@ -132,68 +132,17 @@ public class UTTT_Runner extends Application {
 
 					for (int r=0; r < 3; r++ ) {
 
-						for (int c=0; c < 3; c++ ) { 
+						for (int c=0; c < 3; c++ ) {  
 							
-							char thing = (((TicTacToe)ttt.board[R][r]).board[C][c].value);
-
-							Label space = new Label(Character.toString(thing)); 
-//							System.out.println(Character.toString(thing));
-							VBox vbox = new VBox(space);
+							VBox vbox = new VBox(((TicTacToe)ttt.board[R][r]).board[C][c].space_b);
 							pane.add(vbox, (R*3)+C, (r*3)+c); //Programmatically accommodates 0 to 8 
 						}
 					}
 				} 
 			}
 			
-			//Cols
-//			Label col1 = new Label("Col 1");
-//			Label col2 = new Label("Col 2");
-//			Label col3 = new Label("Col 3");
-//			Label col4 = new Label("Col 4");
-//			Label col5 = new Label("Col 5");
-//			Label col6 = new Label("Col 6");
-//			Label col7 = new Label("Col 7");
-//			Label col8 = new Label("Col 8");
-//			Label col9 = new Label("Col 9");
-//			//Rows
-//			Label row1 = new Label("Row 1");
-//			Label row2 = new Label("Row 2");
-//			Label row3 = new Label("Row 3");
-//			Label row4 = new Label("Row 4");
-//			Label row5 = new Label("Row 5");
-//			Label row6 = new Label("Row 6");
-//			Label row7 = new Label("Row 7");
-//			Label row8 = new Label("Row 8");
-//			Label row9 = new Label("Row 9");
-//			Button testButton = new Button("Start game?");
-//
-//			GridPane pane = new GridPane();
-//			pane.setHgap(30);
-//			pane.setVgap(30);
-//			
-//			pane.add(col1, 0, 0);
-//			pane.add(col2, 1, 0);
-//			pane.add(col3, 2, 0);
-//			pane.add(col4, 3, 0);
-//			pane.add(col5, 4, 0);
-//			pane.add(col6, 5, 0);
-//			pane.add(col7, 6, 0);
-//			pane.add(col8, 7, 0);
-//			pane.add(col9, 8, 0);
-//			
-//			
-//			pane.add(row1, 0, 0);
-//			pane.add(row2, 0, 1);
-//			pane.add(row3, 0, 2);
-//			pane.add(row4, 0, 3);
-//			pane.add(row5, 0, 4);
-//			pane.add(row6, 0, 5);
-//			pane.add(row7, 0, 6);
-//			pane.add(row8, 0, 7);
-//			pane.add(row9, 0, 8);
-//			
-//			
-//			pane.add(testButton, 9, 5);
+			
+			
 			
 			pane.setAlignment(Pos.CENTER);
 			Scene scene = new Scene(pane,700,700);

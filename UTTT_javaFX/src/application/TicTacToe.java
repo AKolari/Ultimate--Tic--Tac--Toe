@@ -2,6 +2,9 @@ package application;
 
 import java.util.Scanner;
 
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+
 /**
  * 
  */
@@ -117,7 +120,10 @@ public class TicTacToe extends Space{
 				last_pos[0] = row; 
 				last_pos[1] = col;
 				
-				board[row][col].value = currentPlayer.getSymbol(); //Marks position 
+				
+				//Value changes
+				board[row][col].value = currentPlayer.getSymbol(); //Marks position  
+				board[row][col].space_b = new Label(""+board[row][col].value);
 				
 				
 				win = isWinner(); //Win condition 
