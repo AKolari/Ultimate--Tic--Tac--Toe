@@ -28,7 +28,10 @@ public class UTTT_Runner extends Application {
 	
 	public static Player PlayerOne=new HumanPlayer("Andi", 'x', 0);
 	public static Player PlayerTwo=new AIPlayer('o', 10);
-	public static UltimateTicTacToe ttt; 
+	public static UltimateTicTacToe ttt;  
+	
+	private TextField colField; 
+	private TextField rowField; 
 	
 	
 	public static void main(String[] args) {
@@ -154,16 +157,17 @@ public class UTTT_Runner extends Application {
 			Label turn = new Label("Player " +ttt.currentPlayer.getName() +"'s turn.");
 			Label colText = new Label("Enter Column");
 			Label rowText = new Label("Enter Row");
-			final TextField colField;
-			final TextField rowField;
+//			final TextField colField;
+//			final TextField rowField; 
 			
 			Button select = new Button("Choose Coordinates");
 			
 		      select.setOnAction(new selectionHandler());
 			
+		    //Instantiation of textfield
+		    colField = new TextField();
+		  	rowField = new TextField();
 			
-			colField= new TextField();
-			rowField = new TextField();
 			
 			pane.add(turn, 9, 0);
 			pane.add(rowText, 10, 1);
@@ -180,7 +184,16 @@ public class UTTT_Runner extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}  
+	
+	class selectionHandler implements EventHandler<ActionEvent> {
+
+		@Override
+		public void handle(ActionEvent event) { 
+			String x_input = rowField.getText(); 
+			String y_input = colField.getText();
+	
+		}
 }
 
 /**
@@ -190,15 +203,6 @@ public class UTTT_Runner extends Application {
  * @author Steven
  *
  */
- class selectionHandler implements EventHandler<ActionEvent> {
+ 
 
-	@Override
-	public void handle(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
-		
-
-		
-	}
-
-}
+} //END OF UTTT_Runner
