@@ -6,7 +6,7 @@ import java.io.Serializable;
 /**
  * Player class is used to save player data and 
  */
-public class Player implements Serializable, rowColumnInterface{
+public abstract class Player implements Serializable, rowColumnInterface{
     private String name;
     private char symbol;    //Future iterations could potentially allow for the setting of custom icons. Unlikely to happen in this iteration.
     private int wins;

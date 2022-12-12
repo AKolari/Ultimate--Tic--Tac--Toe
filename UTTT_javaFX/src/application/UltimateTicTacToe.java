@@ -96,7 +96,7 @@ public class UltimateTicTacToe extends TicTacToe {
 						row = start_pos[0]; 
 						col = start_pos[1]; 
 
-						System.out.println("It is " + currentPlayer.getName() + "'s turn."+((TicTacToe)board[row][col]).isOccupied(row, col));
+//						System.out.println("It is " + currentPlayer.getName() + "'s turn."+((TicTacToe)board[row][col]).isOccupied(row, col));
 						System.out.println(((TicTacToe)board[row][col]).value);
 						
 						System.out.println("\n");
@@ -129,10 +129,10 @@ public class UltimateTicTacToe extends TicTacToe {
 						
 						//Changes next start_pos
 						start_pos[0] = ((TicTacToe)board[row][col]).last_pos[0]; 
-						System.out.println("start_pos[0] = " + start_pos[0] + "\n" );
+//						System.out.println("start_pos[0] = " + start_pos[0] + "\n" );
 
 						start_pos[1] = ((TicTacToe)board[row][col]).last_pos[1]; 
-						System.out.println("start_pos[1] = " + start_pos[1] + "\n" );
+//						System.out.println("start_pos[1] = " + start_pos[1] + "\n" );
 						
 						this.win = isWinner(); //Win condition 
 						
