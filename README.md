@@ -8,3 +8,6 @@ This Java project allows the user to play a game of Ultimate Tic Tac Toe in the 
 UML Diagram:
 ![image](https://github.com/AKolari/Tic-Tac-Two/assets/90071560/6cea8cc4-61e6-48f2-a25a-1caf5c1b93e7)
 
+
+We initially used a different repository, before switching to this one. Our initial repo is here: 
+- https://github.com/AKolari/Ultimate-Tic-Tac-Toe
