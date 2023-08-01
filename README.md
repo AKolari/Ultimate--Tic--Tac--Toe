@@ -1,5 +1,5 @@
-# Tic-Tac-Two
-Tic-Tac-Two, also know as Ultimate Tic Tac Toe is a board game based on Tic-Tac-Toe, consisting of nine Tic-Tac-Toe boards. You can learn more about it here:
+# Ultimate Tic Tac Toe
+Ultimate Tic Tac Toe, also know as Tic-Tac-Two is a board game based on Tic-Tac-Toe, consisting of nine Tic-Tac-Toe boards. You can learn more about it here:
 - https://en.wikipedia.org/wiki/Ultimate_tic-tac-toe
 
 This Java project allows the user to play a game of Ultimate Tic Tac Toe in the terminal, either against another player or an AI.
